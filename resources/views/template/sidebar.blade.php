@@ -50,7 +50,7 @@
             </li>
             <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
               <a href="{{ route('dashboard') }}">
-                <i class="fas fa-th-large"></i>
+                <i class="fas fa-user-tag"></i>
                 <p>Disciples Community</p>
               </a>
             </li>
