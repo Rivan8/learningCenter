@@ -41,24 +41,29 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
-          @if(auth()->check() && auth()->user()->statusanggota === 'DM')
+          @if(auth()->check() && auth()->user()->role === 'admin')
             <li class="nav-item {{ request()->routeIs(('member')) ? 'active' : '' }}">
               <a href="{{ route('member') }}">
                 <i class="fas fa-home"></i>
                 <p>Home</p>
               </a>
             </li>
-            <li class="nav-section">
-              <span class="sidebar-mini-icon">
-                <i class="fa fa-ellipsis-h"></i>
-              </span>
-              <h4 class="text-section">Components</h4>
+            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+              <a href="{{ route('dashboard') }}">
+                <i class="fas fa-th-large"></i>
+                <p>Disciples Community</p>
+              </a>
             </li>
-          @elseif(auth()->check() && auth()->user()->statusanggota === 'Core Team')
-            <li class="nav-item {{ request()->routeIs(('member')) ? 'active' : '' }}">
-              <a href="{{ route('member') }}">
-                <i class="fas fa-home"></i>
-                <p>Home</p>
+            <li class="nav-item {{ request()->routeIs('equipClass.index') ? 'active' : '' }}">
+              <a href="{{ route('equipClass.index') }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>FC1 & MC</p>
+              </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('equipPlant.index') ? 'active' : '' }}">
+              <a href="{{ route('equipPlant.index') }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>FC 2 & FC 3</p>
               </a>
             </li>
             <li class="nav-section">
@@ -72,6 +77,26 @@
               <a href="{{ route('member') }}">
                 <i class="fas fa-home"></i>
                 <p>Home</p>
+              </a>
+            </li>
+            {{-- Disciples Community --}}
+            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+              <a href="{{ route('dashboard') }}">
+                <i class="fas fa-th-large"></i>
+                <p>Disciples Community</p>
+              </a>
+            </li>
+            {{-- Equip Class --}}
+            <li class="nav-item {{ request()->routeIs('equipClass.index') ? 'active' : '' }}">
+              <a href="{{ route('equipClass.index') }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>FC1 & MC</p>
+              </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('equipPlant.index') ? 'active' : '' }}">
+              <a href="{{ route('equipPlant.index') }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>FC 2 & FC 3</p>
               </a>
             </li>
           @endif
