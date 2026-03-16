@@ -28,29 +28,29 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="{{ route('users.index', ['progress_filter' => 'completed', 'sort_by' => request('sort_by')]) }}" class="text-decoration-none">
+                            <a href="{{ route('users.index', ['sort_by' => request('sort_by')]) }}" class="text-decoration-none">
                                 <div class="card bg-success text-white">
                                     <div class="card-body">
-                                        <h5 class="card-title">Selesai (100%)</h5>
-                                        <h3>{{ $completedCount }} <small>user</small></h3>
+                                        <h5 class="card-title">Disciple Maker (DM)</h5>
+                                        <h3>{{ $dmCount }} <small>user</small></h3>
                                         <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $completedPercentage }}%;" aria-valuenow="{{ $completedPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $dmPercentage }}%;" aria-valuenow="{{ $dmPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <small>{{ $completedPercentage }}% dari total user</small>
+                                        <small>{{ $dmPercentage }}% dari total user</small>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="{{ route('users.index', ['progress_filter' => 'in_progress', 'sort_by' => request('sort_by')]) }}" class="text-decoration-none">
+                            <a href="{{ route('users.index', ['sort_by' => request('sort_by')]) }}" class="text-decoration-none">
                                 <div class="card bg-info text-white">
                                     <div class="card-body">
-                                        <h5 class="card-title">Sedang Berjalan</h5>
-                                        <h3>{{ $inProgressCount }} <small>user</small></h3>
+                                        <h5 class="card-title">Core Team</h5>
+                                        <h3>{{ $coreTeamCount }} <small>user</small></h3>
                                         <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $inProgressPercentage }}%;" aria-valuenow="{{ $inProgressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $coreTeamPercentage }}%;" aria-valuenow="{{ $coreTeamPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <small>{{ $inProgressPercentage }}% dari total user</small>
+                                        <small>{{ $coreTeamPercentage }}% dari total user</small>
                                     </div>
                                 </div>
                             </a>

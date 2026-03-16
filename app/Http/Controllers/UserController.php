@@ -54,6 +54,16 @@ class UserController extends BaseController
         $inProgressPercentage = $totalUsers > 0 ? round(($inProgressCount / $totalUsers) * 100) : 0;
         $notStartedPercentage = $totalUsers > 0 ? round(($notStartedCount / $totalUsers) * 100) : 0;
         
+        $dmCount = $users->filter(function($user) {
+            return $user->statusanggota === 'DM';
+        })->count();
+        $dmPercentage = $totalUsers > 0 ? round(($dmCount / $totalUsers) * 100) : 0;
+        
+        $coreTeamCount = $users->filter(function($user) {
+            return $user->statusanggota !== 'DM';
+        })->count();
+        $coreTeamPercentage = $totalUsers > 0 ? round(($coreTeamCount / $totalUsers) * 100) : 0;
+        
         // Filter by progress level if requested
         $progressFilter = $request->query('progress_filter', '');
         if ($progressFilter === 'completed') {
@@ -89,7 +99,11 @@ class UserController extends BaseController
             'notStartedCount', 
             'completedPercentage', 
             'inProgressPercentage', 
-            'notStartedPercentage'
+            'notStartedPercentage',
+            'dmCount',
+            'dmPercentage',
+            'coreTeamCount',
+            'coreTeamPercentage'
         ));
     }
 
