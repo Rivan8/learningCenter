@@ -40,11 +40,11 @@ $baseUrl = rtrim(request()->getBaseUrl(), '/');
                                                 ? 'selected' : '' }}>New</option>
                                             <option value="plant" {{ old('statusnextstep', $user->statusnextstep) ==
                                                 'plant' ? 'selected' : '' }}>Plant</option>
-                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                            <option value="grow-1" {{ old('statusnextstep', $user->statusnextstep) ==
                                                 'grow-1' ? 'selected' : '' }}>Grow - Grade 1</option>
-                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                            <option value="grow-2" {{ old('statusnextstep', $user->statusnextstep) ==
                                                 'grow-2' ? 'selected' : '' }}>Grow - Grade 2</option>
-                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                            <option value="grow-3" {{ old('statusnextstep', $user->statusnextstep) ==
                                                 'grow-3' ? 'selected' : '' }}>Grow - Grade 3</option>
                                             <option value="fruitfull" {{ old('statusnextstep', $user->statusnextstep) ==
                                                 'fruitfull' ? 'selected' : '' }}>Fruitfull</option>

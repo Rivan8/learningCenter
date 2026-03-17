@@ -31,74 +31,77 @@ class UserController extends BaseController
 
         $users = User::all();
         $totalUsers = $users->count();
-        
+
         // Preload video progress data for each user
         foreach ($users as $user) {
             $user->why_video_progress = $user->getVideoProgressPercentage('why');
         }
-        
+
         // Calculate statistics
-        $completedCount = $users->filter(function($user) {
+        $completedCount = $users->filter(function ($user) {
             return $user->why_video_progress >= 100;
         })->count();
-        
-        $inProgressCount = $users->filter(function($user) {
+
+        $inProgressCount = $users->filter(function ($user) {
             return $user->why_video_progress > 0 && $user->why_video_progress < 100;
         })->count();
-        
-        $notStartedCount = $users->filter(function($user) {
+
+        $notStartedCount = $users->filter(function ($user) {
             return $user->why_video_progress == 0;
         })->count();
-        
+
         $completedPercentage = $totalUsers > 0 ? round(($completedCount / $totalUsers) * 100) : 0;
         $inProgressPercentage = $totalUsers > 0 ? round(($inProgressCount / $totalUsers) * 100) : 0;
         $notStartedPercentage = $totalUsers > 0 ? round(($notStartedCount / $totalUsers) * 100) : 0;
-        
-        $dmCount = $users->filter(function($user) {
+
+        $dmCount = $users->filter(function ($user) {
             return $user->statusanggota === 'DM';
         })->count();
         $dmPercentage = $totalUsers > 0 ? round(($dmCount / $totalUsers) * 100) : 0;
-        
-        $coreTeamCount = $users->filter(function($user) {
+
+        $coreTeamCount = $users->filter(function ($user) {
             return $user->statusanggota !== 'DM';
         })->count();
         $coreTeamPercentage = $totalUsers > 0 ? round(($coreTeamCount / $totalUsers) * 100) : 0;
-        
+
         // Filter by progress level if requested
         $progressFilter = $request->query('progress_filter', '');
         if ($progressFilter === 'completed') {
-            $users = $users->filter(function($user) {
+            $users = $users->filter(function ($user) {
                 return $user->why_video_progress >= 100;
             });
-        } elseif ($progressFilter === 'in_progress') {
-            $users = $users->filter(function($user) {
+        }
+        elseif ($progressFilter === 'in_progress') {
+            $users = $users->filter(function ($user) {
                 return $user->why_video_progress > 0 && $user->why_video_progress < 100;
             });
-        } elseif ($progressFilter === 'not_started') {
-            $users = $users->filter(function($user) {
+        }
+        elseif ($progressFilter === 'not_started') {
+            $users = $users->filter(function ($user) {
                 return $user->why_video_progress == 0;
             });
         }
-        
+
         // Sort by video progress if requested
         $sortBy = $request->query('sort_by', '');
         if ($sortBy === 'progress_asc') {
             $users = $users->sortBy('why_video_progress');
-        } elseif ($sortBy === 'progress_desc') {
+        }
+        elseif ($sortBy === 'progress_desc') {
             $users = $users->sortByDesc('why_video_progress');
         }
-        
+
         return view('users.index', compact(
-            'users', 
-            'title', 
-            'sortBy', 
-            'progressFilter', 
-            'totalUsers', 
-            'completedCount', 
-            'inProgressCount', 
-            'notStartedCount', 
-            'completedPercentage', 
-            'inProgressPercentage', 
+            'users',
+            'title',
+            'sortBy',
+            'progressFilter',
+            'totalUsers',
+            'completedCount',
+            'inProgressCount',
+            'notStartedCount',
+            'completedPercentage',
+            'inProgressPercentage',
             'notStartedPercentage',
             'dmCount',
             'dmPercentage',
@@ -126,7 +129,7 @@ class UserController extends BaseController
             'role' => 'required|in:admin,member',
             'statusanggota' => 'required|in:Core Team,DM,belum',
             'status' => 'required|in:active,inactive,suspended',
-            'statusnextstep' => 'required|in:new,plant,grow,fruitfull',
+            'statusnextstep' => 'required|in:new,plant,grow-1,grow-2,grow-3,fruitfull',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -190,7 +193,7 @@ class UserController extends BaseController
             'statusanggota' => 'required|in:Core Team,DM,belum',
             'role' => 'required|in:admin,member',
             'status' => 'required|in:active,inactive,suspended',
-            'statusnextstep' => 'required|in:new,plant,grow,fruitfull',
+            'statusnextstep' => 'required|in:new,plant,grow-1,grow-2,grow-3,fruitfull',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi foto
         ]);
 
@@ -223,7 +226,8 @@ class UserController extends BaseController
         try {
             $user->save();
             return redirect()->route('users.index')->with('berhasil', 'Data user berhasil diperbaharui.');
-        } catch(\Exception $e) {
+        }
+        catch (\Exception $e) {
             return redirect()->route('users.edit', $user->id)->with('gagal', 'Gagal update user.');
         }
     }

@@ -171,6 +171,12 @@
               <p>Users</p>
             </a>
           </li>
+          <li class="nav-section">
+            <span class="sidebar-mini-icon">
+              <i class="fa fa-ellipsis-h"></i>
+            </span>
+            <h4 class="text-section">Components</h4>
+          </li>
           <li class="nav-item {{ request()->routeIs('admin.access-requests') ? 'active' : '' }}">
             <a href="{{ route('admin.access-requests') }}" class="d-flex align-items-center justify-content-between">
               <span>
