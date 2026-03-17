@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $baseUrl = rtrim(request()->getBaseUrl(), '/');
+$baseUrl = rtrim(request()->getBaseUrl(), '/');
 @endphp
 <div class="container-fluid">
     <div class="row">
@@ -30,91 +30,89 @@
                                 <h5 class="mb-3 text-primary">Informasi Pribadi</h5>
 
                                 <div class="mb-3">
-                                <div class="mb-3">
-                                    <label for="statusnextstep" class="form-label">Status Next Step <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('statusnextstep') is-invalid @enderror"
-                                            id="statusnextstep"
-                                            name="statusnextstep" required>
-                                        <option value="">Pilih status next step</option>
-                                        <option value="new" {{ old('statusnextstep', $user->statusnextstep) == 'new' ? 'selected' : '' }}>New</option>
-                                        <option value="plant" {{ old('statusnextstep', $user->statusnextstep) == 'plant' ? 'selected' : '' }}>Plant</option>
-                                        <option value="grow" {{ old('statusnextstep', $user->statusnextstep) == 'grow' ? 'selected' : '' }}>Grow</option>
-                                        <option value="fruitfull" {{ old('statusnextstep', $user->statusnextstep) == 'fruitfull' ? 'selected' : '' }}>Fruitfull</option>
-                                    </select>
-                                    @error('statusnextstep')
+                                    <div class="mb-3">
+                                        <label for="statusnextstep" class="form-label">Status Next Step <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select @error('statusnextstep') is-invalid @enderror"
+                                            id="statusnextstep" name="statusnextstep" required>
+                                            <option value="">Pilih status next step</option>
+                                            <option value="new" {{ old('statusnextstep', $user->statusnextstep) == 'new'
+                                                ? 'selected' : '' }}>New</option>
+                                            <option value="plant" {{ old('statusnextstep', $user->statusnextstep) ==
+                                                'plant' ? 'selected' : '' }}>Plant</option>
+                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                                'grow-1' ? 'selected' : '' }}>Grow - Grade 1</option>
+                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                                'grow-2' ? 'selected' : '' }}>Grow - Grade 2</option>
+                                            <option value="grow" {{ old('statusnextstep', $user->statusnextstep) ==
+                                                'grow-3' ? 'selected' : '' }}>Grow - Grade 3</option>
+                                            <option value="fruitfull" {{ old('statusnextstep', $user->statusnextstep) ==
+                                                'fruitfull' ? 'selected' : '' }}>Fruitfull</option>
+                                        </select>
+                                        @error('statusnextstep')
                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                    <label for="name" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                                    <input type="text"
-                                           class="form-control @error('name') is-invalid @enderror"
-                                           id="name"
-                                           name="name"
-                                           value="{{ old('name', $user->name) }}"
-                                           placeholder="Masukkan nama lengkap"
-                                           required>
+                                        @enderror
+                                    </div>
+                                    <label for="name" class="form-label">Nama Lengkap <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        id="name" name="name" value="{{ old('name', $user->name) }}"
+                                        placeholder="Masukkan nama lengkap" required>
                                     @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="email"
-                                           class="form-control @error('email') is-invalid @enderror"
-                                           id="email"
-                                           name="email"
-                                           value="{{ old('email', $user->email) }}"
-                                           placeholder="contoh@email.com"
-                                           required>
+                                    <label for="email" class="form-label">Email <span
+                                            class="text-danger">*</span></label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                        id="email" name="email" value="{{ old('email', $user->email) }}"
+                                        placeholder="contoh@email.com" required>
                                     @error('email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="no_hp" class="form-label">Nomor Telepon <span class="text-danger">*</span></label>
-                                    <input type="text"
-                                           class="form-control @error('no_hp') is-invalid @enderror"
-                                           id="no_hp"
-                                           name="no_hp"
-                                           value="{{ old('no_hp', $user->no_hp) }}"
-                                           placeholder="08xxxxxxxxxx"
-                                           required>
+                                    <label for="no_hp" class="form-label">Nomor Telepon <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
+                                        id="no_hp" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
+                                        placeholder="08xxxxxxxxxx" required>
                                     @error('no_hp')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
-                                    <select name="jenis_kelamin"
-                                            id="jenis_kelamin"
-                                            class="form-select @error('jenis_kelamin') is-invalid @enderror"
-                                            required>
+                                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span
+                                            class="text-danger">*</span></label>
+                                    <select name="jenis_kelamin" id="jenis_kelamin"
+                                        class="form-select @error('jenis_kelamin') is-invalid @enderror" required>
                                         <option value="">Pilih jenis kelamin</option>
-                                        <option value="laki-laki" {{ old('jenis_kelamin', $user->jenis_kelamin) == 'laki-laki' ? 'selected' : '' }}>
+                                        <option value="laki-laki" {{ old('jenis_kelamin', $user->jenis_kelamin) ==
+                                            'laki-laki' ? 'selected' : '' }}>
                                             Laki-laki
                                         </option>
-                                        <option value="perempuan" {{ old('jenis_kelamin', $user->jenis_kelamin) == 'perempuan' ? 'selected' : '' }}>
+                                        <option value="perempuan" {{ old('jenis_kelamin', $user->jenis_kelamin) ==
+                                            'perempuan' ? 'selected' : '' }}>
                                             Perempuan
                                         </option>
                                     </select>
                                     @error('jenis_kelamin')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat <span class="text-danger">*</span></label>
-                                    <textarea class="form-control @error('alamat') is-invalid @enderror"
-                                              id="alamat"
-                                              name="alamat"
-                                              rows="3"
-                                              placeholder="Masukkan alamat lengkap"
-                                              required>{{ old('alamat', $user->alamat) }}</textarea>
+                                    <label for="alamat" class="form-label">Alamat <span
+                                            class="text-danger">*</span></label>
+                                    <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                                        name="alamat" rows="3" placeholder="Masukkan alamat lengkap"
+                                        required>{{ old('alamat', $user->alamat) }}</textarea>
                                     @error('alamat')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -124,78 +122,79 @@
                                 <h5 class="mb-3 text-primary">Informasi Akun</h5>
 
                                 <div class="mb-3">
-                                    <label for="statusanggota" class="form-label">Status Anggota <span class="text-danger">*</span></label>
-                                    <select name="statusanggota"
-                                            id="statusanggota"
-                                            class="form-select @error('statusanggota') is-invalid @enderror"
-                                            required>
+                                    <label for="statusanggota" class="form-label">Status Anggota <span
+                                            class="text-danger">*</span></label>
+                                    <select name="statusanggota" id="statusanggota"
+                                        class="form-select @error('statusanggota') is-invalid @enderror" required>
                                         <option value="">Pilih status anggota</option>
-                                        <option value="belum" {{ old('statusanggota', $user->statusanggota) == 'belum' ? 'selected' : '' }}>
+                                        <option value="belum" {{ old('statusanggota', $user->statusanggota) == 'belum' ?
+                                            'selected' : '' }}>
                                             Belum Tergabung
                                         </option>
-                                        <option value="Core Team" {{ old('statusanggota', $user->statusanggota) == 'Core Team' ? 'selected' : '' }}>
+                                        <option value="Core Team" {{ old('statusanggota', $user->statusanggota) == 'Core
+                                            Team' ? 'selected' : '' }}>
                                             Core Team
                                         </option>
-                                        <option value="DM" {{ old('statusanggota', $user->statusanggota) == 'DM' ? 'selected' : '' }}>
+                                        <option value="DM" {{ old('statusanggota', $user->statusanggota) == 'DM' ?
+                                            'selected' : '' }}>
                                             Disciples Maker
                                         </option>
                                     </select>
                                     @error('statusanggota')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('role') is-invalid @enderror"
-                                            id="role"
-                                            name="role"
-                                            required>
+                                    <select class="form-select @error('role') is-invalid @enderror" id="role"
+                                        name="role" required>
                                         <option value="">Pilih role</option>
-                                        <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>
+                                        <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : ''
+                                            }}>
                                             Administrator
                                         </option>
-                                        <option value="member" {{ old('role', $user->role) == 'member' ? 'selected' : '' }}>
+                                        <option value="member" {{ old('role', $user->role) == 'member' ? 'selected' : ''
+                                            }}>
                                             Member
                                         </option>
                                     </select>
                                     @error('role')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="status" class="form-label">Status Pengguna <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('status') is-invalid @enderror"
-                                            id="status"
-                                            name="status"
-                                            required>
+                                    <label for="status" class="form-label">Status Pengguna <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select @error('status') is-invalid @enderror" id="status"
+                                        name="status" required>
                                         <option value="">Pilih status</option>
-                                        <option value="active" {{ old('status', $user->status ?? 'active') == 'active' ? 'selected' : '' }}>
+                                        <option value="active" {{ old('status', $user->status ?? 'active') == 'active' ?
+                                            'selected' : '' }}>
                                             Aktif
                                         </option>
-                                        <option value="inactive" {{ old('status', $user->status ?? 'active') == 'inactive' ? 'selected' : '' }}>
+                                        <option value="inactive" {{ old('status', $user->status ?? 'active') ==
+                                            'inactive' ? 'selected' : '' }}>
                                             Tidak Aktif
                                         </option>
-                                        <option value="suspended" {{ old('status', $user->status ?? 'active') == 'suspended' ? 'selected' : '' }}>
+                                        <option value="suspended" {{ old('status', $user->status ?? 'active') ==
+                                            'suspended' ? 'selected' : '' }}>
                                             Ditangguhkan
                                         </option>
                                     </select>
                                     @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="photo" class="form-label">Foto Profil</label>
-                                    <input type="file"
-                                           class="form-control @error('photo') is-invalid @enderror"
-                                           id="photo"
-                                           name="photo"
-                                           accept="image/*">
+                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"
+                                        id="photo" name="photo" accept="image/*">
                                     <div class="form-text">Format yang didukung: JPG, PNG, GIF. Maksimal 2MB.</div>
                                     @error('photo')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
@@ -204,9 +203,8 @@
                                     <label class="form-label">Foto Saat Ini</label>
                                     <div class="border rounded p-2">
                                         <img src="{{ $baseUrl }}/storage/{{ $user->photo }}"
-                                             alt="Foto profil {{ $user->name }}"
-                                             class="img-thumbnail"
-                                             style="max-width: 200px; height: auto;">
+                                            alt="Foto profil {{ $user->name }}" class="img-thumbnail"
+                                            style="max-width: 200px; height: auto;">
                                     </div>
                                 </div>
                                 @endif

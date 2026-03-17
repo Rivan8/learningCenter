@@ -1,10 +1,9 @@
-
 @extends('layouts.app')
 
 @section('content')
 
 @php
-  $assetBase = rtrim(request()->getBasePath(), '\/');
+$assetBase = rtrim(request()->getBasePath(), '\/');
 @endphp
 
 <style>
@@ -162,13 +161,15 @@
 <div class="hero-section position-relative mb-5">
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner rounded-4 shadow-lg overflow-hidden">
             <div class="carousel-item active">
-                <img src="{{ $assetBase }}/assets/img/DcCollage.png" class="d-block w-100" alt="Disciples Community" style="height: 500px; object-fit: cover; filter: brightness(0.7);">
+                <img src="{{ $assetBase }}/assets/img/DcCollage.png" class="d-block w-100" alt="Disciples Community"
+                    style="height: 500px; object-fit: cover; filter: brightness(0.7);">
                 <div class="carousel-caption d-none d-md-block text-start pb-5 mb-4">
                     <h1 class="display-4 fw-bold">ESC Equip - Foundation Class 1</h1>
                     <p class="lead">Keselamatan & Baptisan</p>
@@ -178,7 +179,8 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84" class="d-block w-100" alt="Core Team Training" style="height: 500px; object-fit: cover; filter: brightness(0.7);">
+                <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84" class="d-block w-100"
+                    alt="Core Team Training" style="height: 500px; object-fit: cover; filter: brightness(0.7);">
                 <div class="carousel-caption d-none d-md-block text-start pb-5 mb-4">
                     <h1 class="display-4 fw-bold">ESC Equip - Foundation Class 2</h1>
                     <p class="lead">Firman, Doa dan Komunitas</p>
@@ -231,7 +233,7 @@
     }
 
     // Start the clock when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         updateClock();
     });
 </script>
@@ -259,7 +261,7 @@
         <div class="container">
             <div class="page-inner">
                 <div class="section-header mb-4">
-                    <h2 class="section-title">Disciples Community <span class="text-primary-light">(DC)</span></h2>
+                    <h2 class="section-title">Equip Class <span class="text-primary-light">(EC)</span></h2>
                     <div class="section-divider"></div>
                 </div>
 
@@ -278,53 +280,72 @@
                             <div class="col-md-6 col-12">
                                 <div class="card h-100 shadow-sm rounded-4 overflow-hidden">
                                     <div class="position-relative">
-                                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29" class="card-img-top" alt="The Why" style="height: 200px; object-fit: cover;">
-                                        <div class="card-img-overlay d-flex align-items-end" style="background: linear-gradient(to top, rgba(42, 47, 91, 0.8), transparent);">
+                                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29"
+                                            class="card-img-top" alt="The Why"
+                                            style="height: 200px; object-fit: cover;">
+                                        <div class="card-img-overlay d-flex align-items-end"
+                                            style="background: linear-gradient(to top, rgba(42, 47, 91, 0.8), transparent);">
                                             <h4 class="text-white fw-bold mb-3">Foundation Class 1</h4>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column justify-content-between p-4">
                                         <div>
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="icon-circle bg-primary-light me-3" style="width: 32px; height: 32px;">
+                                                <div class="icon-circle bg-primary-light me-3"
+                                                    style="width: 32px; height: 32px;">
                                                     <i class="fas fa-graduation-cap text-white small"></i>
                                                 </div>
                                                 <h5 class="card-title mb-0">Foundation Class 1</h5>
                                             </div>
-                                            <p class="card-text">Foundation Class 1 merupakan langkah awal yang fundamental dalam perjalanan kekristenan. Kelas ini memberikan pemahaman teologis yang mendalam namun praktis mengenai Keselamatan—memahami anugerah Allah dan karya penebusan Kristus—serta signifikansi Baptisan Air sebagai tanda perjanjian dan proklamasi iman di hadapan publik. Peserta akan dibimbing untuk memiliki kepastian keselamatan (assurance of salvation) yang teguh.</p>
+                                            <p class="card-text">Foundation Class 1 merupakan langkah awal yang
+                                                fundamental dalam perjalanan kekristenan. Kelas ini memberikan pemahaman
+                                                teologis yang mendalam namun praktis mengenai Keselamatan—memahami
+                                                anugerah Allah dan karya penebusan Kristus—serta signifikansi Baptisan
+                                                Air sebagai tanda perjanjian dan proklamasi iman di hadapan publik.
+                                                Peserta akan dibimbing untuk memiliki kepastian keselamatan (assurance
+                                                of salvation) yang teguh.</p>
                                         </div>
-                                        <button type="button" class="btn btn-primary-custom w-100 mt-3" data-bs-toggle="modal" data-bs-target="#modalFc1">
+                                        <button type="button" class="btn btn-primary-custom w-100 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#modalFc1">
                                             <i class="fas fa-play-circle me-2"></i> Tonton Video
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div class="col-md-6 col-12">
                                 <div class="card h-100 shadow-sm rounded-4 overflow-hidden">
                                     <div class="position-relative">
-                                        <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84" class="card-img-top" alt="The What" style="height: 200px; object-fit: cover;">
-                                        <div class="card-img-overlay d-flex align-items-end" style="background: linear-gradient(to top, rgba(42, 47, 91, 0.8), transparent);">
+                                        <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84"
+                                            class="card-img-top" alt="The What"
+                                            style="height: 200px; object-fit: cover;">
+                                        <div class="card-img-overlay d-flex align-items-end"
+                                            style="background: linear-gradient(to top, rgba(42, 47, 91, 0.8), transparent);">
                                             <h4 class="text-white fw-bold mb-3">Membership Class</h4>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column justify-content-between p-4">
                                         <div>
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="icon-circle bg-primary-light me-3" style="width: 32px; height: 32px;">
+                                                <div class="icon-circle bg-primary-light me-3"
+                                                    style="width: 32px; height: 32px;">
                                                     <i class="fas fa-users-cog text-white small"></i>
                                                 </div>
                                                 <h5 class="card-title mb-0">Memberhip Class</h5>
                                             </div>
-                                            <p class="card-text">Ingin tahu lebih banyak tentang Elshaddai Church? Kelas ini adalah gerbang utama bagi Anda untuk memahami segala hal mendasar tentang gereja kami sebelum Anda memutuskan untuk terlibat lebih dalam atau bergabung dalam tim pelayanan.</p>
+                                            <p class="card-text">Ingin tahu lebih banyak tentang Elshaddai Church? Kelas
+                                                ini adalah gerbang utama bagi Anda untuk memahami segala hal mendasar
+                                                tentang gereja kami sebelum Anda memutuskan untuk terlibat lebih dalam
+                                                atau bergabung dalam tim pelayanan.</p>
                                         </div>
-                                        <button type="button" class="btn btn-primary-custom w-100 mt-3" data-bs-toggle="modal" data-bs-target="#modalMc">
+                                        <button type="button" class="btn btn-primary-custom w-100 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#modalMc">
                                             <i class="fas fa-play-circle me-2"></i> Tonton Video
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VideoProgressController;
 use App\Http\Controllers\AccessRequestController;
 use App\Http\Controllers\Fc1McRequestController;
+use App\Http\Controllers\Fc2Fc3RequestController;
+use App\Http\Controllers\Grade1RequestController;
+use App\Http\Controllers\Grade2RequestController;
+use App\Http\Controllers\Grade3RequestController;
+use App\Http\Controllers\MarriageClassRequestController;
 
 
 // Test route untuk memastikan Laravel berfungsi
@@ -145,6 +150,9 @@ Route::post('/api/video-progress/reset', [VideoProgressController::class, 'reset
 Route::post('/request-access', [AccessRequestController::class, 'store'])->name('request-access.store');
 Route::post('/fc1-mc/requests', [Fc1McRequestController::class, 'store'])->middleware('auth')->name('fc1mc.requests.store');
 
+// Route untuk FC2 & FC3 requests (member)
+Route::post('/fc2-fc3/requests', [Fc2Fc3RequestController::class, 'store'])->middleware('auth')->name('fc2fc3.requests.store');
+
 // Route untuk admin melihat tabel request akses
 Route::get('/admin/access-requests', [AccessRequestController::class, 'index'])->middleware('auth')->name('admin.access-requests');
 Route::post('/admin/access-requests/{id}/approve', [AccessRequestController::class, 'approve'])->middleware('auth')->name('admin.access-requests.approve');
@@ -152,4 +160,32 @@ Route::post('/admin/access-requests/{id}/reject', [AccessRequestController::clas
 Route::get('/admin/fc1mc-requests', [Fc1McRequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc1mc-requests');
 Route::post('/admin/fc1mc-requests/{id}/approve', [Fc1McRequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc1mc-requests.approve');
 Route::post('/admin/fc1mc-requests/{id}/reject', [Fc1McRequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc1mc-requests.reject');
+
+// Route untuk admin melihat tabel request FC2 & FC3
+Route::get('/admin/fc2fc3-requests', [Fc2Fc3RequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc2fc3-requests');
+Route::post('/admin/fc2fc3-requests/{id}/approve', [Fc2Fc3RequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc2fc3-requests.approve');
+Route::post('/admin/fc2fc3-requests/{id}/reject', [Fc2Fc3RequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.fc2fc3-requests.reject');
+
+// Route untuk member request akses Grow & Marriage Class
+Route::post('/grade1/requests', [Grade1RequestController::class, 'store'])->middleware('auth')->name('grade1.requests.store');
+Route::post('/grade2/requests', [Grade2RequestController::class, 'store'])->middleware('auth')->name('grade2.requests.store');
+Route::post('/grade3/requests', [Grade3RequestController::class, 'store'])->middleware('auth')->name('grade3.requests.store');
+Route::post('/marriage-class/requests', [MarriageClassRequestController::class, 'store'])->middleware('auth')->name('marriage-class.requests.store');
+
+// Route untuk admin list & setujui/tolak kelas Grow & Marriage
+Route::get('/admin/grade1-requests', [Grade1RequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade1-requests');
+Route::post('/admin/grade1-requests/{id}/approve', [Grade1RequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade1-requests.approve');
+Route::post('/admin/grade1-requests/{id}/reject', [Grade1RequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade1-requests.reject');
+
+Route::get('/admin/grade2-requests', [Grade2RequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade2-requests');
+Route::post('/admin/grade2-requests/{id}/approve', [Grade2RequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade2-requests.approve');
+Route::post('/admin/grade2-requests/{id}/reject', [Grade2RequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade2-requests.reject');
+
+Route::get('/admin/grade3-requests', [Grade3RequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade3-requests');
+Route::post('/admin/grade3-requests/{id}/approve', [Grade3RequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade3-requests.approve');
+Route::post('/admin/grade3-requests/{id}/reject', [Grade3RequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.grade3-requests.reject');
+
+Route::get('/admin/marriage-class-requests', [MarriageClassRequestController::class, 'adminIndex'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.marriage-class-requests');
+Route::post('/admin/marriage-class-requests/{id}/approve', [MarriageClassRequestController::class, 'approve'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.marriage-class-requests.approve');
+Route::post('/admin/marriage-class-requests/{id}/reject', [MarriageClassRequestController::class, 'reject'])->middleware(['auth', \App\Http\Middleware\CheckAdminRole::class])->name('admin.marriage-class-requests.reject');
 });
