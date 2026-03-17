@@ -73,96 +73,96 @@
             <h4 class="text-section">Components</h4>
           </li>
           @else
-            @php
-              $userId = auth()->id();
+          @php
+          $userId = auth()->id();
 
-              // Cek apakah akses Disciples Community sudah approved
-              $dcApproved = \App\Models\AccessRequest::where('user_id', $userId)
-                              ->where('status', 'approved')
-                              ->exists();
+          // Cek apakah akses Disciples Community sudah approved
+          $dcApproved = \App\Models\AccessRequest::where('user_id', $userId)
+          ->where('status', 'approved')
+          ->exists();
 
-              // Cek apakah akses FC1 & MC sudah approved
-              $fc1Approved = \App\Models\Fc1McRequest::where('user_id', $userId)
-                               ->where('status', 'approved')
-                               ->exists();
+          // Cek apakah akses FC1 & MC sudah approved
+          $fc1Approved = \App\Models\Fc1McRequest::where('user_id', $userId)
+          ->where('status', 'approved')
+          ->exists();
 
-              // FC2 & FC3 menggunakan model request tersendiri
-              $fc2Approved = \App\Models\Fc2Fc3Request::where('user_id', $userId)
-                               ->where('status', 'approved')
-                               ->exists();
-            @endphp
+          // FC2 & FC3 menggunakan model request tersendiri
+          $fc2Approved = \App\Models\Fc2Fc3Request::where('user_id', $userId)
+          ->where('status', 'approved')
+          ->exists();
+          @endphp
 
-            {{-- Home - selalu tampil --}}
-            <li class="nav-item {{ request()->routeIs(('home')) ? 'active' : '' }}">
-              <a href="{{ route('member') }}">
-                <i class="fas fa-home"></i>
-                <p>Home</p>
-              </a>
-            </li>
+          {{-- Home - selalu tampil --}}
+          <li class="nav-item {{ request()->routeIs(('home')) ? 'active' : '' }}">
+            <a href="{{ route('member') }}">
+              <i class="fas fa-home"></i>
+              <p>Home</p>
+            </a>
+          </li>
 
-            {{-- Disciples Community: tampil hanya jika sudah approved --}}
-            @if($dcApproved)
-              <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <a href="{{ route('dashboard') }}">
-                  <i class="fas fa-th-large"></i>
-                  <p>Disciples Community</p>
-                </a>
-              </li>
-            @else
-              <li class="nav-item nav-item-locked" title="Ajukan request untuk mengakses Disciples Community">
-                <a href="#" class="nav-link-locked" onclick="return false;">
-                  <i class="fas fa-lock" style="opacity:0.45;"></i>
-                  <p style="opacity:0.45;">Disciples Community</p>
-                  <span class="sidebar-lock-badge">Belum Aktif</span>
-                </a>
-              </li>
-            @endif
+          {{-- Disciples Community: tampil hanya jika sudah approved --}}
+          @if($dcApproved)
+          <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}">
+              <i class="fas fa-th-large"></i>
+              <p>Disciples Community</p>
+            </a>
+          </li>
+          @else
+          <li class="nav-item nav-item-locked" title="Ajukan request untuk mengakses Disciples Community">
+            <a href="#" class="nav-link-locked" onclick="return false;">
+              <i class="fas fa-lock" style="opacity:0.45;"></i>
+              <p style="opacity:0.45;">Disciples Community</p>
+              <span class="sidebar-lock-badge">Belum Aktif</span>
+            </a>
+          </li>
+          @endif
 
-            {{-- FC1 & MC: tampil hanya jika sudah approved --}}
-            @if($fc1Approved)
-              <li class="nav-item {{ request()->routeIs('equipClass.index') ? 'active' : '' }}">
-                <a href="{{ route('equipClass.index') }}">
-                  <i class="fas fa-chalkboard-teacher"></i>
-                  <p>FC1 & MC</p>
-                </a>
-              </li>
-            @else
-              <li class="nav-item nav-item-locked" title="Ajukan request untuk mengakses FC1 & MC">
-                <a href="#" class="nav-link-locked" onclick="return false;">
-                  <i class="fas fa-lock" style="opacity:0.45;"></i>
-                  <p style="opacity:0.45;">FC1 & MC</p>
-                  <span class="sidebar-lock-badge">Belum Aktif</span>
-                </a>
-              </li>
-            @endif
+          {{-- FC1 & MC: tampil hanya jika sudah approved --}}
+          @if($fc1Approved)
+          <li class="nav-item {{ request()->routeIs('equipClass.index') ? 'active' : '' }}">
+            <a href="{{ route('equipClass.index') }}">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <p>FC1 & MC</p>
+            </a>
+          </li>
+          @else
+          <li class="nav-item nav-item-locked" title="Ajukan request untuk mengakses FC1 & MC">
+            <a href="#" class="nav-link-locked" onclick="return false;">
+              <i class="fas fa-lock" style="opacity:0.45;"></i>
+              <p style="opacity:0.45;">FC1 & MC</p>
+              <span class="sidebar-lock-badge">Belum Aktif</span>
+            </a>
+          </li>
+          @endif
 
-            {{-- FC2 & FC3: tampil hanya jika FC1 & MC sudah approved --}}
-            @if($fc2Approved)
-              <li class="nav-item {{ request()->routeIs('equipPlant.index') ? 'active' : '' }}">
-                <a href="{{ route('equipPlant.index') }}">
-                  <i class="fas fa-chalkboard-teacher"></i>
-                  <p>FC2 & FC3</p>
-                </a>
-              </li>
-            @else
-              <li class="nav-item nav-item-locked" title="Selesaikan FC1 & MC terlebih dahulu untuk membuka FC2 & FC3">
-                <a href="#" class="nav-link-locked" onclick="return false;">
-                  <i class="fas fa-lock" style="opacity:0.45;"></i>
-                  <p style="opacity:0.45;">FC2 & FC3</p>
-                  <span class="sidebar-lock-badge">Belum Aktif</span>
-                </a>
-              </li>
-            @endif
+          {{-- FC2 & FC3: tampil hanya jika FC1 & MC sudah approved --}}
+          @if($fc2Approved)
+          <li class="nav-item {{ request()->routeIs('equipPlant.index') ? 'active' : '' }}">
+            <a href="{{ route('equipPlant.index') }}">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <p>FC2 & FC3</p>
+            </a>
+          </li>
+          @else
+          <li class="nav-item nav-item-locked" title="Selesaikan FC1 & MC terlebih dahulu untuk membuka FC2 & FC3">
+            <a href="#" class="nav-link-locked" onclick="return false;">
+              <i class="fas fa-lock" style="opacity:0.45;"></i>
+              <p style="opacity:0.45;">FC2 & FC3</p>
+              <span class="sidebar-lock-badge">Belum Aktif</span>
+            </a>
+          </li>
+          @endif
 
           @endif
           @if(auth()->check() && auth()->user()->role === 'admin')
           @php
-          $pendingAccessRequests  = \App\Models\AccessRequest::where('status', 'pending')->count();
-          $pendingFc1McRequests   = \App\Models\Fc1McRequest::where('status', 'pending')->count();
-          $pendingFc2Fc3Requests  = \App\Models\Fc2Fc3Request::where('status', 'pending')->count();
-          $pendingGrade1Requests  = \App\Models\Grade1Request::where('status', 'pending')->count();
-          $pendingGrade2Requests  = \App\Models\Grade2Request::where('status', 'pending')->count();
-          $pendingGrade3Requests  = \App\Models\Grade3Request::where('status', 'pending')->count();
+          $pendingAccessRequests = \App\Models\AccessRequest::where('status', 'pending')->count();
+          $pendingFc1McRequests = \App\Models\Fc1McRequest::where('status', 'pending')->count();
+          $pendingFc2Fc3Requests = \App\Models\Fc2Fc3Request::where('status', 'pending')->count();
+          $pendingGrade1Requests = \App\Models\Grade1Request::where('status', 'pending')->count();
+          $pendingGrade2Requests = \App\Models\Grade2Request::where('status', 'pending')->count();
+          $pendingGrade3Requests = \App\Models\Grade3Request::where('status', 'pending')->count();
           $pendingMarriageRequests = \App\Models\MarriageClassRequest::where('status', 'pending')->count();
           @endphp
           <li class="nav-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
@@ -175,7 +175,7 @@
             <a href="{{ route('admin.access-requests') }}" class="d-flex align-items-center justify-content-between">
               <span>
                 <i class="fas fa-envelope-open-text"></i>
-                <p class="d-inline ms-2 mb-0">Request Peserta</p>
+                <p class="d-inline ms-2 mb-0">Request CTT & DMT</p>
               </span>
               @if($pendingAccessRequests > 0)
               <span class="badge"
@@ -244,7 +244,8 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('admin.marriage-class-requests') ? 'active' : '' }}">
-            <a href="{{ route('admin.marriage-class-requests') }}" class="d-flex align-items-center justify-content-between">
+            <a href="{{ route('admin.marriage-class-requests') }}"
+              class="d-flex align-items-center justify-content-between">
               <span>
                 <i class="fas fa-rings"></i>
                 <p class="d-inline ms-2 mb-0">Request Marriage Class</p>
@@ -348,13 +349,14 @@
   <!-- End Sidebar -->
   <style>
     /* Sidebar item terkunci */
-    .nav-item-locked > a.nav-link-locked {
+    .nav-item-locked>a.nav-link-locked {
       cursor: not-allowed !important;
       pointer-events: all;
       display: flex;
       align-items: center;
       gap: 4px;
     }
+
     .sidebar-lock-badge {
       display: inline-block;
       margin-left: auto;
