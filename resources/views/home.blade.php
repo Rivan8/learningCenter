@@ -18,33 +18,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-light: #6366f1;
-            --primary-dark: #3730a3;
-            --secondary-color: #64748b;
-            --accent-color: #f59e0b;
+            --primary-color: #1e3a8a;
+            --primary-light: #3b82f6;
+            --primary-dark: #172554;
+            --secondary-color: #475569;
+            --accent-color: #d4af37;
+            --accent-light: #fcd34d;
             --success-color: #10b981;
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
             --light-bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
             --border-color: #e2e8f0;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --gradient-info: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+            --gradient-secondary: linear-gradient(135deg, #d4af37 0%, #b48608 100%);
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-warning: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            --gradient-info: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
             --soft-green: rgba(16, 185, 129, 0.1);
             --soft-pink: rgba(239, 68, 68, 0.1);
             --soft-yellow: rgba(245, 158, 11, 0.1);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         * {
@@ -54,11 +57,27 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: var(--font-body);
+            background: #fcfbfa;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(30, 58, 138, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
             min-height: 100vh;
             color: var(--text-primary);
             line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .hero-title,
+        .course-title,
+        .brand-text {
+            font-family: var(--font-heading);
         }
 
         /* Modern Navbar Styling */
@@ -380,24 +399,24 @@
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
             font-weight: 400;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.8;
+            font-family: var(--font-body);
         }
 
         .hero-stats {
@@ -426,7 +445,7 @@
         /* Course Cards */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2.5rem;
             margin-top: 3rem;
             justify-items: center;
@@ -434,82 +453,62 @@
 
         /* Ensure cards maintain consistent width */
         .course-card {
-            width: 100%;
-            max-width: 420px;
-            min-width: 380px;
-        }
-
-        /* Filtered card layout - maintain consistent sizing */
-        .course-grid.filtered {
-            justify-content: center;
-        }
-
-        .course-grid.filtered .course-card {
-            margin: 0 auto;
-        }
-
-        /* Single card layout - center and maintain size */
-        .course-grid.single-card {
-            justify-content: center;
-            align-items: start;
-        }
-
-        .course-grid.single-card .course-card {
-            margin: 0 auto;
-            grid-column: 1 / -1;
-            justify-self: center;
-        }
-
-        .course-card {
             background: var(--card-bg);
-            border-radius: 24px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
             transition: all 0.4s ease;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            /* Subtle gold border */
             cursor: pointer;
             position: relative;
-            /* Ensure consistent dimensions */
-            height: fit-content;
-            flex-shrink: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 420px;
         }
 
         .course-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-light);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.08);
+            /* Navy hint shadow */
+            border-color: rgba(212, 175, 55, 0.4);
         }
 
         /* Modern Request Button Styling */
         .request-btn-container {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px dashed rgba(212, 175, 55, 0.2);
             text-align: center;
         }
 
         .request-btn {
-            background: var(--gradient-primary);
-            border: none;
-            color: white;
+            background: var(--gradient-secondary);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #fff !important;
             padding: 12px 28px;
-            border-radius: 50px;
+            border-radius: 8px;
+            /* Sharper edges */
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
             position: relative;
             overflow: hidden;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
         .request-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
-            color: white;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+            color: #fff !important;
+            background: linear-gradient(135deg, #b48608 0%, #d4af37 100%);
             text-decoration: none;
         }
 
@@ -569,14 +568,110 @@
             box-shadow: 0 8px 25px rgba(239, 68, 68, 0.35);
         }
 
+        /* Status Banner Styling */
+        .status-banner {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .pending-banner {
+            border-left-color: var(--warning-color);
+        }
+
+        .approved-banner {
+            border-left-color: var(--success-color);
+        }
+
+        .rejected-banner {
+            border-left-color: var(--danger-color);
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .banner-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .pending-banner .banner-icon {
+            background: var(--soft-yellow);
+            color: var(--warning-color);
+        }
+
+        .approved-banner .banner-icon {
+            background: var(--soft-green);
+            color: var(--success-color);
+        }
+
+        .rejected-banner .banner-icon {
+            background: var(--soft-pink);
+            color: var(--danger-color);
+        }
+
+        .banner-text {
+            flex: 1;
+        }
+
+        .banner-title {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .banner-description {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .banner-action {
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .banner-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s ease;
+            opacity: 0.5;
+        }
+
+        .banner-close:hover {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
         /* Status Banner Progress Ring */
         .banner-progress {
             margin-left: auto;
         }
 
         .progress-ring {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             position: relative;
         }
 
@@ -586,19 +681,19 @@
             border: 4px solid var(--border-color);
             border-top: 4px solid var(--primary-color);
             border-radius: 50%;
-            animation: spin 2s linear infinite;
+            animation: spin 1s linear infinite;
         }
 
         .pending-banner .progress-circle {
-            border-top-color: #f59e0b;
+            border-top-color: var(--warning-color);
         }
 
         .approved-banner .progress-circle {
-            border-top-color: #10b981;
+            border-top-color: var(--success-color);
         }
 
         .rejected-banner .progress-circle {
-            border-top-color: #ef4444;
+            border-top-color: var(--danger-color);
         }
 
         @keyframes spin {
@@ -616,792 +711,160 @@
             .banner-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 1rem;
+                gap: 15px;
             }
 
-            .banner-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-            }
-
-            .banner-title {
-                font-size: 1.1rem;
-            }
-
-            .banner-description {
-                font-size: 0.9rem;
-            }
-
-            .banner-action {
-                margin-left: 0;
-                margin-top: 0.5rem;
-            }
-
-            .request-btn {
-                padding: 10px 24px;
-                font-size: 0.9rem;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .request-btn-container {
-                margin-top: 1rem;
-                padding-top: 1rem;
+            .banner-action,
+            .banner-progress {
+                margin: 10px 0 0 0;
             }
         }
 
-        /* Enhanced hover effects */
-        .request-btn:hover .request-btn-icon {
-            transform: scale(1.1) rotate(5deg);
-            filter: brightness(1.2);
-        }
-
-        /* Button loading state */
-        .request-btn.loading {
-            pointer-events: none;
-            opacity: 0.8;
-        }
-
-        .request-btn.loading .request-btn-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Info Box Styling */
-        #infoBox {
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
-            color: #4f46e5;
-            border-left: 4px solid #4f46e5;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        #infoBox:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.15);
-        }
-
-        #infoBox i {
-            color: #4f46e5;
-            font-size: 1.1rem;
-        }
-
-        /* Success state animation */
-        .request-btn.success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            animation: success-bounce 0.6s ease-out;
-        }
-
-        @keyframes success-bounce {
-
-            0%,
-            20%,
-            60%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-10px);
-            }
-
-            80% {
-                transform: translateY(-5px);
-            }
-        }
-
+        /* Added LMS Elegant Course Card Styling */
         .course-image {
-            height: 220px;
             position: relative;
+            width: 100%;
+            height: 220px;
             overflow: hidden;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.1);
         }
 
         .course-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.6s ease;
         }
 
         .course-card:hover .course-image img {
-            transform: scale(1.05);
+            transform: scale(1.08);
+            /* Subtle zoom on hover */
         }
 
         .course-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            top: 15px;
+            right: 15px;
+            background: var(--gradient-secondary);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
         }
 
         .course-content {
-            padding: 2rem;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+            /* allow spreading */
         }
 
         .course-title {
             font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin: 0;
             line-height: 1.3;
         }
 
         .course-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
             font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            font-family: var(--font-body);
         }
 
         .course-features {
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
         }
 
         .course-features li {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 0.8rem;
-            color: var(--text-secondary);
+            gap: 10px;
             font-size: 0.9rem;
-            font-weight: 500;
+            color: var(--text-secondary);
         }
 
         .course-features li i {
-            color: var(--success-color);
-            font-size: 0.9rem;
-            background: var(--soft-green);
-            padding: 6px;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1rem;
         }
 
         .course-status {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
         }
 
         .status-badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .status-available {
-            background: var(--soft-green);
+            background-color: var(--soft-green);
             color: var(--success-color);
             border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .status-locked {
-            background: var(--soft-pink);
-            color: var(--danger-color);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .status-warning {
-            background: var(--soft-yellow);
+            background-color: var(--soft-yellow);
             color: var(--warning-color);
             border: 1px solid rgba(245, 158, 11, 0.2);
         }
 
-        .progress-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .progress-bar {
-            width: 80px;
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-success);
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-
-        /* Category Pills */
+        /* Category Pills Styling */
         .category-pills {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
             flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 35px;
         }
 
         .category-pill {
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            padding: 8px 25px;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
             font-weight: 500;
+            color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--text-secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            font-size: 0.95rem;
         }
 
         .category-pill:hover,
         .category-pill.active {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .course-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                justify-items: center;
-            }
-
-            .course-card {
-                min-width: 320px;
-                max-width: 100%;
-            }
-
-            .main-container {
-                padding: 2rem 1rem;
-            }
-
-            .hero-stats {
-                gap: 2rem;
-            }
-
-            .stat-number {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Additional responsive breakpoints for better card layout */
-        @media (max-width: 1200px) {
-            .course-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .course-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .course-card {
-                min-width: 280px;
-                max-width: 100%;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .course-card {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .course-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .course-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .course-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .course-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .course-card:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        /* Floating Elements */
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
-        }
-
-        /* Pulse animation for brand logo */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-            }
-
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-            }
-        }
-
-        .pulse-animation {
-            animation: pulse 1s ease-in-out;
-        }
-
-        /* Glow effect for active elements */
-        .nav-link.active {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            transition: all 0.5s ease;
-        }
-
-        .nav-link.active:hover::after {
-            width: 80%;
-            left: 10%;
-        }
-
-        /* Smooth page transitions */
-        body {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Access Info Styling */
-        .access-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            color: #6366f1;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .access-info i {
-            font-size: 1.1rem;
-            margin-right: 0.5rem;
-        }
-
-        /* Status Notification Banner Styling */
-        .status-banner {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .status-banner:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .status-banner.pending-banner {
-            border-left: 5px solid #f59e0b;
-            background: linear-gradient(135deg, var(--card-bg) 0%, var(--soft-yellow) 100%);
-        }
-
-        .status-banner.approved-banner {
-            border-left: 5px solid #10b981;
-            background: linear-gradient(135deg, var(--card-bg) 0%, var(--soft-green) 100%);
-        }
-
-        .status-banner.rejected-banner {
-            border-left: 5px solid #ef4444;
-            background: linear-gradient(135deg, var(--card-bg) 0%, var(--soft-pink) 100%);
-        }
-
-        .banner-content {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            position: relative;
-        }
-
-        .banner-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            background: var(--soft-blue);
-            border-radius: 50%;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .banner-icon:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(99, 102, 241, 0.15);
-        }
-
-        .pending-banner .banner-icon {
-            color: #f59e0b;
-            background: var(--soft-yellow);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.1);
-        }
-
-        .approved-banner .banner-icon {
-            color: #10b981;
-            background: var(--soft-green);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);
-        }
-
-        .rejected-banner .banner-icon {
-            color: #ef4444;
-            background: var(--soft-pink);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.1);
-        }
-
-        .banner-text {
-            flex-grow: 1;
-        }
-
-        .banner-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .banner-description {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .banner-action {
-            margin-left: auto;
-        }
-
-        .banner-action .btn {
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .banner-action .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .banner-action .btn-success {
-            background: var(--gradient-success);
-            color: white;
-        }
-
-        .banner-action .btn-warning {
-            background: var(--gradient-warning);
-            color: white;
-        }
-
-        /* Banner Close Button */
-        .banner-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .banner-close:hover {
-            background: rgba(255, 255, 255, 1);
-            color: var(--text-primary);
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .banner-close span {
-            line-height: 1;
-        }
-
-        /* Request Button Styling - Pastikan terlihat */
-        .request-btn-container {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        .request-btn {
-            background: var(--gradient-primary);
-            border: none;
-            color: white !important;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
-            position: relative;
-            overflow: hidden;
-            display: inline-flex !important;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .request-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
-            color: white !important;
-            text-decoration: none;
-        }
-
-        .request-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .request-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .request-btn:hover::before {
-            left: 100%;
-        }
-
-        .request-btn-icon {
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .request-btn:hover .request-btn-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Button states */
-        .request-btn.pending {
-            background: var(--gradient-warning);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
-        }
-
-        .request-btn.pending:hover {
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
-        }
-
-        .request-btn.approved {
-            background: var(--gradient-success);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
-        }
-
-        .request-btn.approved:hover {
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
-        }
-
-        .request-btn.rejected {
             background: var(--gradient-secondary);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.25);
-        }
-
-        .request-btn.rejected:hover {
-            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.35);
-        }
-
-        /* Status Banner Progress Ring */
-        .banner-progress {
-            margin-left: auto;
-        }
-
-        .progress-ring {
-            width: 60px;
-            height: 60px;
-            position: relative;
-        }
-
-        .progress-circle {
-            width: 100%;
-            height: 100%;
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 2s linear infinite;
-        }
-
-        .pending-banner .progress-circle {
-            border-top-color: #f59e0b;
-        }
-
-        .approved-banner .progress-circle {
-            border-top-color: #10b981;
-        }
-
-        .rejected-banner .progress-circle {
-            border-top-color: #ef4444;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -1502,11 +965,15 @@
         <div class="container">
             <!-- Hero Section -->
             <div class="hero-section">
-                <h1 class="hero-title">Selamat Datang di ESC Equip Center</h1>
-                {{-- <p class="hero-subtitle">Platform kelas pemuridan dengan materi terstruktur, interaktif, dan
-                    berstandar profesional.</p> --}}
-                <!-- <div class="mt-4 d-flex justify-content-center gap-3">
-                    <a href="{{ route('dashboard') }}" class="btn btn-primary px-4 py-2">
+                <span class="animate__animated animate__fadeInDown"
+                    style="color: var(--accent-color); font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 15px; display: inline-block;">Pusat
+                    Pelatihan Rohani</span>
+                <h1 class="hero-title animate__animated animate__fadeInUp">ESC Equip Center</h1>
+                <p class="hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">Membangun
+                    fondasi rohani yang kokoh dan melatih pemimpin yang berdampak melalui pembelajaran Firman Tuhan yang
+                    mendalam, terstruktur, dan transformatif.</p>
+                <!-- <div class="mt-4 d-flex justify-content-center gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary px-4 py-2" style="background: var(--gradient-primary); border: none; font-weight: 500; border-radius: 8px; padding: 12px 30px !important; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);">
                         <i class="fas fa-play-circle me-2"></i>Mulai Kelas
                     </a>
                     <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 py-2">
@@ -1810,7 +1277,7 @@
                         <form method="POST" action="{{ route('grade1.requests.store') }}" id="requestGrade1Form">
                             @csrf
                             <div class="modal-header"
-                                style="background: linear-gradient(90deg,#10b981,#047857); border-radius: 8px 8px 0 0;">
+                                style="background: var(--gradient-primary); border-radius: 8px 8px 0 0;">
                                 <h5 class="modal-title text-white">
                                     <i class="fas fa-user-graduate me-2"></i>Request Akses Grade 1 - The Cross
                                 </h5>
@@ -1834,7 +1301,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary" id="submitBtnGrade1"
-                                    style="background:linear-gradient(90deg,#10b981,#047857);border:none;">
+                                    style="background: var(--gradient-primary);border:none;">
                                     <i class="fas fa-paper-plane me-2"></i>Kirim Permintaan
                                 </button>
                             </div>
@@ -1849,7 +1316,7 @@
                         <form method="POST" action="{{ route('grade2.requests.store') }}" id="requestGrade2Form">
                             @csrf
                             <div class="modal-header"
-                                style="background: linear-gradient(90deg,#10b981,#047857); border-radius: 8px 8px 0 0;">
+                                style="background: var(--gradient-primary); border-radius: 8px 8px 0 0;">
                                 <h5 class="modal-title text-white">
                                     <i class="fas fa-user-graduate me-2"></i>Request Akses Grade 2 - The Power
                                 </h5>
@@ -1873,7 +1340,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary" id="submitBtnGrade2"
-                                    style="background:linear-gradient(90deg,#10b981,#047857);border:none;">
+                                    style="background: var(--gradient-primary);border:none;">
                                     <i class="fas fa-paper-plane me-2"></i>Kirim Permintaan
                                 </button>
                             </div>
@@ -1888,7 +1355,7 @@
                         <form method="POST" action="{{ route('grade3.requests.store') }}" id="requestGrade3Form">
                             @csrf
                             <div class="modal-header"
-                                style="background: linear-gradient(90deg,#10b981,#047857); border-radius: 8px 8px 0 0;">
+                                style="background: var(--gradient-primary); border-radius: 8px 8px 0 0;">
                                 <h5 class="modal-title text-white">
                                     <i class="fas fa-user-graduate me-2"></i>Request Akses Grade 3 - The Eternity
                                 </h5>
@@ -1912,7 +1379,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary" id="submitBtnGrade3"
-                                    style="background:linear-gradient(90deg,#10b981,#047857);border:none;">
+                                    style="background: var(--gradient-primary);border:none;">
                                     <i class="fas fa-paper-plane me-2"></i>Kirim Permintaan
                                 </button>
                             </div>
@@ -1928,7 +1395,7 @@
                             id="requestMarriageClassForm">
                             @csrf
                             <div class="modal-header"
-                                style="background: linear-gradient(90deg,#10b981,#047857); border-radius: 8px 8px 0 0;">
+                                style="background: var(--gradient-primary); border-radius: 8px 8px 0 0;">
                                 <h5 class="modal-title text-white">
                                     <i class="fas fa-user-graduate me-2"></i>Request Akses Marriage Class
                                 </h5>
@@ -1952,7 +1419,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary" id="submitBtnMarriageClass"
-                                    style="background:linear-gradient(90deg,#10b981,#047857);border:none;">
+                                    style="background: var(--gradient-primary);border:none;">
                                     <i class="fas fa-paper-plane me-2"></i>Kirim Permintaan
                                 </button>
                             </div>
@@ -2005,7 +1472,7 @@
                         <form method="POST" action="{{ route('fc2fc3.requests.store') }}" id="requestFc2Fc3Form">
                             @csrf
                             <div class="modal-header"
-                                style="background: linear-gradient(90deg,#0ea5e9,#4f46e5); border-radius: 8px 8px 0 0;">
+                                style="background: var(--gradient-primary); border-radius: 8px 8px 0 0;">
                                 <h5 class="modal-title text-white" id="requestFc2Fc3ModalLabel">
                                     <i class="fas fa-chalkboard-teacher me-2"></i>Request Akses FC2 &amp; FC3
                                 </h5>
@@ -2030,7 +1497,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary" id="submitBtnFc2Fc3"
-                                    style="background:linear-gradient(90deg,#0ea5e9,#4f46e5);border:none;">
+                                    style="background: var(--gradient-primary);border:none;">
                                     <i class="fas fa-paper-plane me-2"></i>Kirim Permintaan
                                 </button>
                             </div>
