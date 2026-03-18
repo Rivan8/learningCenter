@@ -299,6 +299,7 @@ $classInitial = 'CTT';
                 // === LOGIC VIDEO WHY ===
                 let currentVideoIndexWhy = 0;
                 let maxTimeReachedWhy = 0;
+                const videoTypeWhy = 'CTT';
 
                 function setActiveVideoWhy(idx) {
                   var files = @json($videoFilesWhy);
@@ -357,6 +358,66 @@ $classInitial = 'CTT';
                   }
                 }
 
+                function saveVideoProgressWhy(index, percentage, currentTime = 0) {
+                  fetch("{{ route('video.progress.update') }}", {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                      video_type: videoTypeWhy,
+                      video_index: index,
+                      progress_percentage: Math.round(percentage),
+                      current_time: currentTime,
+                      video_duration: document.getElementById('videoWhy').duration
+                    })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log('Progress saved:', data);
+                  })
+                  .catch(error => {
+                    console.error('Error saving progress:', error);
+                  });
+                }
+
+                function loadVideoProgressWhy() {
+                  return fetch(`{{ route('video.progress.get') }}?video_type=${videoTypeWhy}`)
+                    .then(response => response.json())
+                    .then(result => {
+                      if (result.success && result.data) {
+                        const progressData = result.data;
+                        const listItems = document.querySelectorAll('#videoWhyList .video-list-item');
+                        
+                        progressData.forEach(item => {
+                          const idx = item.video_index;
+                          const percentage = item.progress_percentage;
+                          
+                          if (idx < listItems.length) {
+                            const listItem = document.getElementById(`videoWhyListItem${idx}`);
+                            const progressBar = document.getElementById(`progress-why-${idx}`);
+                            
+                            if (progressBar) {
+                              progressBar.style.width = percentage + '%';
+                            }
+                            
+                            if (percentage >= 100) {
+                              if (listItem) listItem.classList.add('completed-video');
+                              unlockNextVideoWhy(idx);
+                            }
+                          }
+                        });
+                        return progressData;
+                      }
+                      return [];
+                    })
+                    .catch(error => {
+                      console.error('Error loading progress:', error);
+                      return [];
+                    });
+                }
+
                 function notifyLockedWhy(index) {
                   Swal.fire({
                     icon: 'warning',
@@ -370,6 +431,7 @@ $classInitial = 'CTT';
                 document.addEventListener('DOMContentLoaded', function() {
                   const videoPlayer = document.getElementById('videoWhy');
                   const modalWhy = document.getElementById('modalWhy');
+                  let lastSavedPercentage = 0;
 
                   if (videoPlayer) {
                     // Mencegah percepatan video
@@ -380,12 +442,18 @@ $classInitial = 'CTT';
                         maxTimeReachedWhy = Math.max(maxTimeReachedWhy, videoPlayer.currentTime);
                       }
 
-                      // Update progress bar
+                      // Update progress bar & save periodically
                       if (videoPlayer.duration > 0) {
                         const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
                         const progressBar = document.getElementById(`progress-why-${currentVideoIndexWhy}`);
                         if (progressBar) {
                           progressBar.style.width = progress + '%';
+                        }
+
+                        // Save progress every 10%
+                        if (Math.floor(progress / 10) > Math.floor(lastSavedPercentage / 10)) {
+                          saveVideoProgressWhy(currentVideoIndexWhy, progress, videoPlayer.currentTime);
+                          lastSavedPercentage = progress;
                         }
                       }
                     });
@@ -395,6 +463,7 @@ $classInitial = 'CTT';
                       const listItem = document.getElementById(`videoWhyListItem${currentVideoIndexWhy}`);
                       if (listItem) listItem.classList.add('completed-video');
 
+                      saveVideoProgressWhy(currentVideoIndexWhy, 100, videoPlayer.currentTime);
                       unlockNextVideoWhy(currentVideoIndexWhy);
 
                       const videoFiles = @json($videoFilesWhy);
@@ -410,12 +479,20 @@ $classInitial = 'CTT';
                       modalWhy.addEventListener('shown.bs.modal', function() {
                         maxTimeReachedWhy = 0;
                         currentVideoIndexWhy = 0;
+                        lastSavedPercentage = 0;
                         
                         const listItems = document.querySelectorAll('#videoWhyList .video-list-item');
                         listItems.forEach((item, i) => {
                           item.classList.remove('active-video', 'completed-video');
                           if (i === 0) {
                             item.classList.add('active-video');
+                            item.classList.remove('disabled-video');
+                            const playIcon = item.querySelector('.yt-play-icon i');
+                            if (playIcon) {
+                                playIcon.classList.remove('fa-lock');
+                                playIcon.classList.add('fa-play');
+                            }
+                            item.onclick = function() { setActiveVideoWhy(0); };
                           } else {
                             item.classList.add('disabled-video');
                             const playIcon = item.querySelector('.yt-play-icon i');
@@ -429,7 +506,10 @@ $classInitial = 'CTT';
                           if (progressBar) progressBar.style.width = '0%';
                         });
 
-                        setActiveVideoWhy(0);
+                        // Load progress from DB
+                        loadVideoProgressWhy().then(() => {
+                            setActiveVideoWhy(0);
+                        });
                       });
 
                       modalWhy.addEventListener('hidden.bs.modal', function() {
