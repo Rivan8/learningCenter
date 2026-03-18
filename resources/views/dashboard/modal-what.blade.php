@@ -358,6 +358,7 @@ function loadVideoProgressWhat() {
   return fetch(`{{ route('video.progress.get') }}?video_type=${videoTypeWhat}`)
     .then(response => response.json())
     .then(result => {
+      let lastUnlockedIndex = 0;
       if (result.success && result.data) {
         const progressData = result.data;
         const listItems = document.querySelectorAll('#videoListWhat .video-list-item');
@@ -371,15 +372,30 @@ function loadVideoProgressWhat() {
             const progressBar = document.getElementById(`progress-what-${idx}`);
             
             if (progressBar) progressBar.style.width = percentage + '%';
+            
+            // Buka kunci jika >= 80%
+            if (percentage >= 80) {
+              unlockNextVideoWhat(idx);
+              lastUnlockedIndex = Math.max(lastUnlockedIndex, idx + 1);
+            }
+            
             if (percentage >= 100) {
               if (listItem) listItem.classList.add('completed-video');
-              unlockNextVideoWhat(idx);
             }
           }
         });
+        
+        if (lastUnlockedIndex >= listItems.length) {
+            lastUnlockedIndex = listItems.length - 1;
+        }
+        return lastUnlockedIndex;
       }
+      return 0;
     })
-    .catch(error => console.error('Error loading progress:', error));
+    .catch(error => {
+      console.error('Error loading progress:', error);
+      return 0;
+    });
 }
 
 // Fungsi untuk membuka video berikutnya
@@ -404,7 +420,7 @@ function unlockNextVideoWhat(index) {
 }
 
 function notifyLockedWhat(index) {
-  showSwal('Anda harus menyelesaikan video sebelumnya sampai selesai untuk membuka video ini.');
+  showSwal('Anda harus menonton video sebelumnya minimal 80% untuk membuka video ini.');
 }
 
 // Event listener saat modal dibuka
@@ -448,8 +464,8 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       currentVideoIndexWhat = 0;
-      loadVideoProgressWhat().then(() => {
-        changeVideoWhat(videoFiles[0], 0);
+      loadVideoProgressWhat().then((lastIndex) => {
+        changeVideoWhat(videoFiles[lastIndex], lastIndex);
       });
     });
 
@@ -473,6 +489,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.getElementById(`progress-what-${currentVideoIndexWhat}`);
         if (progressBar) {
           progressBar.style.width = progress + '%';
+        }
+
+        // Buka kunci otomatis jika sudah 80%
+        if (progress >= 80) {
+            unlockNextVideoWhat(currentVideoIndexWhat);
         }
 
         // Save progress every 10%

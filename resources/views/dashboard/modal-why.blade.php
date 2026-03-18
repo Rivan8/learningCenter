@@ -386,6 +386,7 @@ $classInitial = 'CTT';
                   return fetch(`{{ route('video.progress.get') }}?video_type=${videoTypeWhy}`)
                     .then(response => response.json())
                     .then(result => {
+                      let lastUnlockedIndex = 0;
                       if (result.success && result.data) {
                         const progressData = result.data;
                         const listItems = document.querySelectorAll('#videoWhyList .video-list-item');
@@ -402,19 +403,31 @@ $classInitial = 'CTT';
                               progressBar.style.width = percentage + '%';
                             }
                             
+                            // Video dianggap selesai jika >= 80% (untuk buka kunci berikutnya)
+                            if (percentage >= 80) {
+                              unlockNextVideoWhy(idx);
+                              lastUnlockedIndex = Math.max(lastUnlockedIndex, idx + 1);
+                            }
+                            
+                            // Tanda centang jika sudah 100%
                             if (percentage >= 100) {
                               if (listItem) listItem.classList.add('completed-video');
-                              unlockNextVideoWhy(idx);
                             }
                           }
                         });
-                        return progressData;
+                        
+                        // Pastikan index tidak melebihi jumlah video
+                        if (lastUnlockedIndex >= listItems.length) {
+                            lastUnlockedIndex = listItems.length - 1;
+                        }
+                        
+                        return lastUnlockedIndex;
                       }
-                      return [];
+                      return 0;
                     })
                     .catch(error => {
                       console.error('Error loading progress:', error);
-                      return [];
+                      return 0;
                     });
                 }
 
@@ -422,7 +435,7 @@ $classInitial = 'CTT';
                   Swal.fire({
                     icon: 'warning',
                     title: 'Peringatan',
-                    text: 'Anda harus menyelesaikan video sebelumnya sampai selesai untuk membuka video ini.',
+                    text: 'Anda harus menonton video sebelumnya minimal 80% untuk membuka video ini.',
                     confirmButtonColor: '#3b82f6'
                   });
                 }
@@ -448,6 +461,11 @@ $classInitial = 'CTT';
                         const progressBar = document.getElementById(`progress-why-${currentVideoIndexWhy}`);
                         if (progressBar) {
                           progressBar.style.width = progress + '%';
+                        }
+
+                        // Buka kunci video berikutnya otomatis jika sudah 80%
+                        if (progress >= 80) {
+                            unlockNextVideoWhy(currentVideoIndexWhy);
                         }
 
                         // Save progress every 10%
@@ -507,8 +525,8 @@ $classInitial = 'CTT';
                         });
 
                         // Load progress from DB
-                        loadVideoProgressWhy().then(() => {
-                            setActiveVideoWhy(0);
+                        loadVideoProgressWhy().then((lastIndex) => {
+                            setActiveVideoWhy(lastIndex);
                         });
                       });
 
