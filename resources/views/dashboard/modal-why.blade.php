@@ -310,10 +310,10 @@ $classInitial = 'CTT';
                   var videoEl = document.getElementById('videoWhy');
                   var sourceEl = document.getElementById('videoWhySource');
                   
-                  // Reset tracking percepatan
                   maxTimeReachedWhy = 0;
                   
-                  sourceEl.src = "{{ $assetBase }}/assets/video/" + encodeURIComponent(files[idx]);
+                  // Menggunakan assetBase untuk path video yang lebih andal
+                  sourceEl.src = `{{ $assetBase }}/assets/video/${encodeURIComponent(files[idx])}`;
                   videoEl.load();
                   
                   document.getElementById('videoWhyTitle').innerHTML = titlesBold[idx];
@@ -330,7 +330,9 @@ $classInitial = 'CTT';
                     var playPromise = videoEl.play();
                     if (playPromise !== undefined) {
                       playPromise.catch(function(err) {
-                        console.warn('Autoplay dicegah:', err);
+                        if (err.name !== 'NotAllowedError') {
+                            console.warn('Autoplay dicegah oleh browser.');
+                        }
                       });
                     }
                     videoEl.removeEventListener('loadeddata', onLoaded);
@@ -345,7 +347,7 @@ $classInitial = 'CTT';
                     const listItem = document.getElementById(`videoWhyListItem${nextIndex}`);
                     const playIcon = listItem.querySelector('.yt-play-icon i');
 
-                    if (listItem) {
+                    if (listItem && listItem.classList.contains('disabled-video')) {
                       listItem.classList.remove('disabled-video');
                       if (playIcon) {
                         playIcon.classList.remove('fa-lock');

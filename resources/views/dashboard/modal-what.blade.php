@@ -306,11 +306,10 @@ function changeVideoWhat(videoFile, index) {
 
   if (!video || !source) return;
 
-  // Reset tracking percepatan
   maxTimeReachedWhat = 0;
 
   video.pause();
-  source.src = "{{ asset('assets/video/') }}/" + videoFile;
+  source.src = `{{ $assetBase }}/assets/video/${encodeURIComponent(videoFile)}`;
   video.load();
 
   document.getElementById('videoWhatTitle').innerText = 'Video ' + videoTitles[index];
@@ -373,7 +372,6 @@ function loadVideoProgressWhat() {
             
             if (progressBar) progressBar.style.width = percentage + '%';
             
-            // Buka kunci jika >= 80%
             if (percentage >= 80) {
               unlockNextVideoWhat(idx);
               lastUnlockedIndex = Math.max(lastUnlockedIndex, idx + 1);
@@ -406,7 +404,7 @@ function unlockNextVideoWhat(index) {
     const listItem = document.getElementById(`video${nextIndex + 1}-what-list`);
     const playIcon = listItem.querySelector('.yt-play-icon i');
 
-    if (listItem) {
+    if (listItem && listItem.classList.contains('disabled-video')) {
       listItem.classList.remove('disabled-video');
       if (playIcon) {
         playIcon.classList.remove('fa-lock');
